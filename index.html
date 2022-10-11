@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="img/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button onclick="phoneclickhendel(false);" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="Phone-count" type="text" class="form-control text-center" value="1">
+                           <button onclick="phoneclickhendel(true);" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$ <span id="Phone-total">1219</span></h5>
+                        <img src="img/product-1.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="img/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button onclick="clickhendel(false);"  class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="Product-number" type="text" class="form-control text-center" value="1">
+                           <button onclick="clickhendel(true);" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           
+                        </div>
+                        <h5>$ <span id="case-total">59</span></h5>
+                        <img src="img/product-2.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$ <span id="total-prices">1,278</span></h5>
+                        <h5>$ <span id="tax-amount">0</span></h5>
+                        <h5>$ <span id="grand-total-amount">1,278</span></h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button id="button-btn" type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <script>
+      // phone price fuction part
+      
+    function phoneclickhendel(condition){
+      const phoneinput = document.getElementById('Phone-count');
+      const Phonecount = parseInt(phoneinput.value);
+      let totalPhonecount = Phonecount;
+      if(condition == true){
+         totalPhonecount = Phonecount + 1;
+      }
+      if(condition == false && Phonecount > 0){
+         totalPhonecount = Phonecount -1;
+      }
+      phoneinput.value = totalPhonecount;
+      const subtotal = totalPhonecount * 1219;
+      document.getElementById('Phone-total').innerText = subtotal;
+      totalpricdhendel();
+    }
+
+
+      // case function part
+
+    function clickhendel(isincrase) {
+    const ProductInput = document.getElementById('Product-number');
+      const Productnumber = parseInt(ProductInput.value);
+      let newproductnumber = Productnumber;
+      if(isincrase==false && Productnumber > 0){
+        newproductnumber = Productnumber - 1;
+      }
+      if(isincrase==true){
+        newproductnumber =Productnumber +1;
+      }
+      ProductInput.value = newproductnumber;
+      const casetotal = newproductnumber * 59;
+      document.getElementById('case-total').innerText = casetotal; 
+      totalpricdhendel();
+    }
+
+
+    // total price function part
+
+    function totalpricdhendel(){
+      const phonecount = productinput('Phone-count');
+      const casecount = productinput('Product-number')
+
+      const totalprices = phonecount * 1219 + casecount * 59;
+      document.getElementById('total-prices').innerText = totalprices;
+
+      const tax = Math.round(totalprices * 0.1);
+      document.getElementById('tax-amount').innerText = tax;
+      const grandtotal = tax + totalprices;
+      document.getElementById('grand-total-amount').innerText = grandtotal;
+
+      // funtion product part  
+     
+    }
+    function productinput(product){
+      const productinput = document.getElementById(product);
+      const productcount = parseInt(productinput.value);
+      return productcount;
+     
+    }
+
+    document.getElementById('button-btn').addEventListener('click',function(){
+      
+    })
+
+
+
+
+   
+   </script>
+</body>
+
+</html>
